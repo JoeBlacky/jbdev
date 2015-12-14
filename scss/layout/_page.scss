@@ -1,0 +1,175 @@
+/* Common ================================================================================ */
+    body{
+        position: relative;
+        text-align: center;
+        text-transform: uppercase;
+        color: #FFF;
+        background: #171717 url('../img/Barney.png') no-repeat 400% 100%;
+        transition-delay: $animationDuration*10;
+        @extend %transition-slow-speed;
+        &.animate{
+             background-position: 100% 100%;
+        }
+    }
+    h2{
+        font: 50px/1.1 $primaryFont;
+    }
+    h1{
+        margin: 0 0 $mainIndent*.75;
+        white-space: nowrap;
+        font: 400 100px/1 $primaryFont;
+        color: $attentionColor;
+        overflow: hidden;
+        b{
+            max-width: 0;
+            overflow: hidden;
+            @extend %inline-block-middle;
+            + span{
+                font-size: 13px;
+            }
+        }
+        span{
+            margin: 0 -30px;
+            font-size: 15px;
+            color: #FFF;
+            @extend %inline-block-middle;
+        }
+    }
+    section{
+        width: 100%;
+        max-width: $mainWidth;
+        padding: 40px 0;
+    }
+    .animate{
+        h1{
+            span{
+                + span{
+                    font-size: 28px;
+                    + b{
+                        @include animation($animationDuration type $animationDuration*4);
+                        + span{
+                            + b{
+                                @include animation($animationDuration type $animationDuration*7);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        h2{
+            @include animation($animationDuration fallDawn);
+        }
+    }
+    .page{
+        max-width: $mainWidth;
+        min-width: $minWidth;
+        margin: 0 auto;
+        font-size: 0;
+        &:before{
+            @extend %inline-block-middle;
+        }
+    }
+    .itm{
+        @extend %inline-block-middle;
+    }
+    .hdn{
+        @extend %hidden;
+    }
+/* Media Queries ========================================================================= */
+    @media screen and (min-width: 1300px){
+        .page{
+            height: 100vh;
+            &:before{
+                content: '';
+                position: relative;
+                height: 100%;
+                width: 0;
+            }
+        }
+    }
+    @media screen and (max-width: 1299px){
+        body{
+            padding: 0 0 400px;
+            background-position: 50% 100%;
+            transition-delay: 0;
+            &.animate{
+                background-position: 50% 100%;
+            }
+        }
+    }
+    @media screen and (max-width: 800px){
+        h1{
+            padding: 0 $mainIndent/2;
+            font-size: 80px;
+            b{
+                margin: 0 (-$mainIndent/2);
+                + span{
+                    font-size: 10px;
+                }
+            }
+            span{
+                margin: 0 -25px;
+                font-size: 12px;
+                + span{
+                    font-size: 23px;
+                }
+            }
+        }
+        h2{
+            font-size: 40px;
+        }
+    }
+    @media screen and (min-width: 601px){
+        .animate{
+            h1{
+                span{
+                    &:first-child{
+                        @include animation(#{$animationDuration/2} getUp #{$animationDuration} 1 forwards,
+                            #{$animationDuration} rotateIn #{$animationDuration*1.5});
+                    }
+                    + span{
+                        @include animation(#{$animationDuration/2} fallDawn #{$animationDuration*2.5} 1 forwards,
+                            #{$animationDuration} rotateIn #{$animationDuration*3});
+                        + b{
+                            + span{
+                                @include animation(#{$animationDuration} scaleUp #{$animationDuration*5} 1 forwards,
+                                    #{$animationDuration} rotateIn #{$animationDuration*6});
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    @media screen and (max-width: 600px){
+        h1{
+            white-space: normal;
+            padding: 0;
+            font-size: 54px;
+            b,
+            span{
+                display: block;
+                margin: 0 auto $mainIndent/2;
+            }
+            span{
+                font-size: 20px;
+                margin: 0 0 $mainIndent/2;
+                @include animation($animationDuration slideLeft $animationDuration);
+                + span{
+                    @include animation($animationDuration slideRight $animationDuration*2);
+                    + b{
+                        + span{
+                            font-size: 20px;
+                            @include animation($animationDuration*2 scaleUp $animationDuration*5);
+                        }
+                    }
+                }
+
+            }
+        }
+        h2{
+            margin: 0 0 $mainIndent/2;
+            font-size: 30px;
+        }
+    }
+/* ======================================================================================= */
