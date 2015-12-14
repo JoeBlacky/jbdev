@@ -3,8 +3,9 @@
     $labelHeight: $labelWidth;
 /* Common ================================================================================ */
     form{
-        opacity: 0;
+        max-width: $mainWidth/2;
         padding: 0 $mainIndent;
+        margin: 0 auto;
         font: 20px/1.1 $primaryFont;
         &.loading{
             fieldset{
@@ -54,8 +55,6 @@
     }
     fieldset{
         position: relative;
-        max-width: $mainWidth/2;
-        margin: 0 auto;
         &:before{
             content: '';
             background: rgba(#FFF, .7) url('../img/ajaxLoader.gif') no-repeat center center;
