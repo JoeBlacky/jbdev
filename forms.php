@@ -4,4 +4,5 @@
     $txt = "Почта: " . $_POST["email"];
 
     mail($to,$subject,$txt);
+    echo $_POST["email"];
 ?>

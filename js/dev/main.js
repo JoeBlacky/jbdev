@@ -73,7 +73,6 @@ var app = {
             var messageText  = 'Yay! Thank you for signing up!'
             var response = 'success';
             showMessage(messageText, response);
-            form.reset()
            }
            else {
             var messageText  = 'Whoops, looks like something went wrong!'
