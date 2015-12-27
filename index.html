@@ -11,10 +11,10 @@
     <link rel="icon" href="/img/favicon.ico" type="image/x-icon" />
     <link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon" />
     <link rel="stylesheet" type="text/css" href="/css/main.css" media="all" />
-    <script type="text/javascript" src="js/script.js" defer></script>
+    <script src="js/min/main.min.js"></script>
 </head>
 <body>
-    <div class="page">
+    <div class="page" id="page">
         <section class="itm wait">
             <h2 class="hdn">Coming soon and</h2>
             <h1>
@@ -24,14 +24,24 @@
                 <span class="hdn">wait for it</span>
                 <b class="hdn">dary</b>
             </h1>
-            <div id="timer" class="hdn"></div>
-            <form action="/forms.php" method="POST" class="hdn">
+            <div id="countdown" class="hdn">
+                <div class="itm days">
+                </div>
+                <div class="itm hours">
+                </div>
+                <div class="itm minutes">
+                </div>
+                <div class="itm seconds">
+                </div>
+            </div>
+            <form id="form" action="/forms.php" method="POST" class="hdn">
                 <legend>Sign up sure not to miss beginning of the launch</legend>
                 <fieldset>
                     <label for="email" class="icn mail">Email</label>
-                    <input placeholder="Email address" name="email" type="email" id="email" pattern="^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$" title="Please enter valid email e.g. example@mail.com" required />
+                    <input placeholder="Email address" name="email" type="email" id="email" title="Please enter valid email e.g. example@mail.com" required />
                     <input type="submit" value="Sign Up" />
                 </fieldset>
+                <label id="message" class="message"></label>
             </form>
         </section>
     </div>

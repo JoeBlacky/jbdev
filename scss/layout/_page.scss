@@ -75,6 +75,26 @@
     .hdn{
         @extend %hidden;
     }
+    .message{
+        display: block;
+        padding: $mainIndent/2;
+        border: 1px solid #FFF;
+        text-transform: none;
+        font-size: 14px;
+        @extend %hidden;
+        @extend %transition-normal-speed;
+        @include translate(0,-10px);
+        &.active{
+            @extend %visible;
+            @include translate(0,0);
+        }
+        &.success{
+            border-color: $successColor;
+        }
+        &.error{
+            border-color: $errorColor;
+        }
+    }
 /* Media Queries ========================================================================= */
     @media screen and (min-width: 1300px){
         .page{

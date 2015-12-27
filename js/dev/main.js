@@ -1,48 +1,110 @@
 var app = {
-    init : function() {
-        this.timerCountdown();
-    },
-    timerCountdown : function() {
-        var launchTime = new Date(2015, 11, 29, 23, 59, 00, 00);
+  init : function() {
+    this.runAnimation();
+    this.countdown();
+    this.form()
+    this.analytics();
+  },
+  countdown : function() {
 
-        $('#timer').countdown({timestamp : launchTime});
-    },
-    formRequest : function(form) {
-        var url = "/forms.php";
+    var launchDate = new Date(Date.parse('Jan 10 2016 00:00:00 GMT+0200'));
+    initializeClock('countdown', launchDate);
 
-        form.addClass('loading');
+    function getTimeRemaining(endtime) {
+      var t = Date.parse(endtime) - Date.parse(new Date());
+      var seconds = Math.floor((t / 1000) % 60);
+      var minutes = Math.floor((t / 1000 / 60) % 60);
+      var hours = Math.floor((t / (1000 * 60 * 60)) % 24);
+      var days = Math.floor(t / (1000 * 60 * 60 * 24));
 
-        $.ajax({
-            type: 'POST',
-            url: url,
-            data: form.serialize(),
-            success: function(data) {
-                form.removeClass('loading');
-            },
-            error: function(xhr, status, error) {
-                form.removeClass('loading');
-            }
-        });
-    },
-    validateForm : function(form) {
-        var emailField = form.find($('input[name="email"]'));
-        var emailValid = emailField.val().match(/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/);
-
-        if (emailValid) {
-            app.formRequest(form);
-            emailField.val('');
-        }
+      return {
+        'total': t,
+        'days': days,
+        'hours': hours,
+        'minutes': minutes,
+        'seconds': seconds
+      };
     }
-}
-jQuery(function($){
-    app.init();
-    $('input[type="submit"]').click(function(e){
-        var form = $(this).closest('form');
 
-        app.validateForm(form);
-        e.preventDefault();
-    });
-    $(window).load(function(){
-        $('body').addClass('animate');
-    });
+    function initializeClock(id, endtime) {
+      var clock = document.getElementById(id);
+      var daysBlock = clock.querySelector('.days');
+      var hoursBlock = clock.querySelector('.hours');
+      var minutesBlock = clock.querySelector('.minutes');
+      var secondsBlock = clock.querySelector('.seconds');
+      var timeinterval = setInterval(updateClock, 1000);
+
+      function updateClock() {
+        var t = getTimeRemaining(endtime);
+
+        daysBlock.innerHTML = ('0' + t.days).slice(-2);
+        hoursBlock.innerHTML = ('0' + t.hours).slice(-2);
+        minutesBlock.innerHTML = ('0' + t.minutes).slice(-2);
+        secondsBlock.innerHTML = ('0' + t.seconds).slice(-2);
+
+        if (t.total <= 0) {
+          clearInterval(timeinterval);
+        }
+      }
+
+      updateClock();
+    }
+  },
+  runAnimation : function() {
+    document.getElementById('page').className += " animate";
+  },
+  form : function() {
+    var form = document.getElementById('form');
+    var message = document.getElementById('message');
+
+    form.onsubmit = function(e) {
+      this.className += " loading"
+      e.preventDefault();
+      sendRequest(this);
+    };
+
+    function sendRequest(form) {
+      var xmlhttp = new XMLHttpRequest();
+
+      xmlhttp.onreadystatechange = function() {
+        if (xmlhttp.readyState == XMLHttpRequest.DONE ) {
+           form.className = form.className.replace(' loading', '');
+           if(xmlhttp.status == 200){
+            var messageText  = 'Yay! Thank you for signing up!'
+            var response = 'success';
+            showMessage(messageText, response);
+            form.reset()
+           }
+           else {
+            var messageText  = 'Whoops, looks like something went wrong!'
+            var response = 'error';
+            showMessage(messageText, response);
+           }
+        }
+      }
+
+      xmlhttp.open("POST", "forms.php", true);
+      xmlhttp.send();
+    }
+
+    function showMessage(messageText, response) {
+      message.className = message.className += ' active' + ' ' + response;
+      message.innerHTML = messageText;
+      setTimeout(function(){
+        message.className = message.className.replace(' active' + ' ' + response, '');
+      }, 3000);
+    }
+  },
+  analytics : function() {
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-71377021-1', 'auto');
+    ga('send', 'pageview');
+  }
+}
+window.onload = (function(){
+  app.init();
 });

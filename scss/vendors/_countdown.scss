@@ -1,38 +1,19 @@
 /* jQueryCountdown ======================================================================= */
-    $countdown: '#timer';
+    $countdown: '#countdown';
     $countBlockWidth: 70px;
     $countBlockHeight: $countBlockWidth;
     $countdownBlockBackground: url('../img/countdown.jpg') no-repeat center center / cover;
 /* Common ================================================================================ */
     #{$countdown}{
         @include scale(0);
-        .countBlock{
+        .itm{
             width: $countBlockWidth;
             height: $countBlockHeight;
             margin: 0 ($minWidth - $countBlockWidth*4)/8 $mainIndent;
             background: $attentionColor $countdownBlockBackground;
             text-align: center;
             color: #4D3802;
-        }
-        .position{
-            position: relative;
-            overflow: hidden;
-        }
-        .digit{
-            vertical-align: top;
-            width: $countBlockWidth/3;
             font: 700 40px/#{$countBlockHeight} $primaryFont;
-            @include scale(.5);
-            @extend %hidden;
-            @extend %transition-fast-speed;
-            &.static{
-                @extend %visible;
-                @include scale(1);
-            }
-            + .digit{
-                position: absolute;
-                left: 0;
-            }
         }
     }
     .animate{
@@ -45,12 +26,9 @@
         $countBlockWidth: 60px;
         $countBlockHeight: $countBlockWidth;
         #{$countdown}{
-            .countBlock{
+            .itm{
                 width: $countBlockWidth;
                 height: $countBlockHeight;
-            }
-            .digit{
-                width: $countBlockWidth/3;
                 font: 700 30px/#{$countBlockHeight} $primaryFont;
             }
         }
