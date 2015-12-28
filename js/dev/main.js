@@ -51,20 +51,21 @@ var app = {
     }
   },
   runAnimation : function() {
-    document.getElementById('page').className += " animate";
+    document.body.className += 'animate';
   },
   form : function() {
     var form = document.getElementById('form');
     var message = document.getElementById('message');
 
     form.onsubmit = function(e) {
-      this.className += " loading"
+      this.className += ' loading'
       e.preventDefault();
       sendRequest(this);
     };
 
     function sendRequest(form) {
       var xmlhttp = new XMLHttpRequest();
+      var emailValue = document.getElementById('email').value;
 
       xmlhttp.onreadystatechange = function() {
         if (xmlhttp.readyState == XMLHttpRequest.DONE ) {
@@ -73,6 +74,7 @@ var app = {
             var messageText  = 'Yay! Thank you for signing up!'
             var response = 'success';
             showMessage(messageText, response);
+            form.reset()
            }
            else {
             var messageText  = 'Whoops, looks like something went wrong!'
@@ -82,8 +84,9 @@ var app = {
         }
       }
 
-      xmlhttp.open("POST", "forms.php", true);
-      xmlhttp.send();
+      xmlhttp.open('POST', 'forms.php');
+      xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+      xmlhttp.send('email=' + emailValue);
     }
 
     function showMessage(messageText, response) {

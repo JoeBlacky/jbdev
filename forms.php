@@ -1,8 +1,7 @@
 <?php
     $to = "gooddealthanks@gmail.com";
     $subject = "Новый подписчик";
-    $txt = "Почта: " . $_POST["email"];
+    $txt = "Почта: " . $_POST['email'];
 
     mail($to,$subject,$txt);
-    echo $_POST["email"];
 ?>
