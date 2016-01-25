@@ -7,7 +7,7 @@ var app = {
   },
   countdown : function() {
 
-    var launchDate = new Date(Date.parse('Jan 20 2016 00:00:00 GMT+0200'));
+    var launchDate = new Date(Date.parse('Jan 31 2016 00:00:00 GMT+0200'));
     initializeClock('countdown', launchDate);
 
     function getTimeRemaining(endtime) {

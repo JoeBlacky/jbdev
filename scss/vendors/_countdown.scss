@@ -2,7 +2,7 @@
     $countdown: '#countdown';
     $countBlockWidth: 70px;
     $countBlockHeight: $countBlockWidth;
-    $countdownBlockBackground: url('../img/countdown.jpg') no-repeat center center / cover;
+    $countdownBlockBackground: url(../img/countdown.jpg) no-repeat center center / cover;
 /* Common ================================================================================ */
     #{$countdown}{
         @include scale(0);

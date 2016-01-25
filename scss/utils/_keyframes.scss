@@ -1,7 +1,7 @@
 /* Keyframes ============================================================================= */
     @include keyframes (getUp){
         0% {
-            margin-bottom: -10%;
+            @include translate(0,20px);
         }
         100%{
             opacity: 1;
@@ -21,7 +21,7 @@
     }
     @include keyframes (fallDawn){
         from{
-            margin-top: -10%;
+            @include translate(0,-20px);
         }
         to{
             opacity: 1;
