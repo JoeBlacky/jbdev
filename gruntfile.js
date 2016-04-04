@@ -18,7 +18,7 @@ module.exports = function(grunt) {
           style: 'compressed'
         },
         files: {
-          'css/main.css': 'scss/main.scss'
+          'css/dev/main.css': 'scss/main.scss'
         }
       }
     },
@@ -61,6 +61,15 @@ module.exports = function(grunt) {
       },
       files: '<%= concat.dist.src %>',
       tasks: ['concat', 'uglify', 'sass']
+    },
+    autoprefixer: {
+      options: {
+        browsers: ['last 2 versions', 'ie 8', 'ie 9']
+      },
+      prefixed_main: {
+        src: 'css/dev/main.css',
+        dest: 'css/main.css'
+      },
     }
   });
 
@@ -69,6 +78,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-sass');
   grunt.loadNpmTasks('grunt-contrib-imagemin');
+  grunt.loadNpmTasks('grunt-autoprefixer');
 
   grunt.registerTask('default', ['concat', 'uglify', 'imagemin']);
 
