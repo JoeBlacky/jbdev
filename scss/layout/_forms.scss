@@ -1,6 +1,9 @@
 /* Common ================================================================================ */
 	$labelWidth: 40px;
 	$labelHeight: $labelWidth;
+	$inputHeight: 40px;
+	$inputLineheight: 20px;
+	$submitBtnWidth: 100px;
 /* Common ================================================================================ */
 	form{
 		max-width: $mainWidth/2;
@@ -22,39 +25,34 @@
 	input{
 		display: block;
 		width: 100%;
-		height: 40px;
+		height: $inputHeight;
 		margin: 0;
-		padding: $mainIndent/2 0;
+		padding: ($inputHeight - $inputLineheight)/2 0;
 		background: #FFF;
-		border: 0;
-		outline: 0;
-		background: #FFF;
-		font: 14px/20px $primaryFont;
+		font: 14px/#{$inputLineheight} $primaryFont;
 		color: #252525;
-		@include border-radius(0);
-		@extend %resetAppearence;
-		@extend %border-box;
+		border-radius: 0;
 		@extend %transition-normal-speed;
 		&:invalid{
-			@include box-shadow(none);
+			box-shadow: none;
 		}
-		&[type="submit"]{
-			position: absolute;
-			width: 100px;
-			height: 40px;
-			right: 0;
-			bottom: 0;
-			padding: 0;
-			background: $attentionColor;
-			font: 700 20px/40px $primaryFont;
-			color: #FFF;
-			cursor: pointer;
-			text-transform: uppercase;
-		}
-		&[type="email"]{
-			padding-right: 110px;
-			text-indent: $labelWidth;
-		}
+	}
+	[type="submit"]{
+		position: absolute;
+		width: $submitBtnWidth;
+		height: 100%;
+		right: 0;
+		bottom: 0;
+		padding: 0;
+		background: $attentionColor;
+		font: 700 20px/#{$inputHeight} $primaryFont;
+		color: #FFF;
+		cursor: pointer;
+		text-transform: uppercase;
+	}
+	[type="email"]{
+		padding-right: $submitBtnWidth + $mainIndent/2;
+		text-indent: $labelWidth;
 	}
 	fieldset{
 		position: relative;
@@ -66,46 +64,28 @@
 			@extend %hidden;
 			@extend %transition-normal-speed;
 		}
-		label{
-			position: absolute;
-			height: $labelHeight;
-			width: $labelWidth;
-			left: 0;
-			top: 0;
-			font-size: 0;
-			color: transparent;
-			cursor: pointer;
-			background: #FFF;
-			&:before{
-				color: $attentionColor;
-				font: ($labelHeight/2)/#{$labelHeight} $iconsFont;
-			}
+	}
+	label{
+		position: absolute;
+		height: $labelHeight;
+		width: $labelWidth;
+		left: 0;
+		top: 0;
+		font-size: 0;
+		color: transparent;
+		cursor: pointer;
+		background: #FFF;
+		&:before{
+			color: $attentionColor;
+			font: ($labelHeight/2)/#{$labelHeight} $iconsFont;
 		}
 	}
-	.animate{
-		form{
-			@include animation($animationDuration fadeIn $animationDuration*9);
+	#{$notHandheld}{
+		[type="submit"]{
+			&:hover{
+				background: darken($attentionColor,10%);
+			}
 		}
 	}
 /* Media Queries ========================================================================= */
-	@media screen and (min-width: 1025px){
-		input{
-			&[type="submit"]{
-				&:hover{
-					background: darken($attentionColor, 10%);
-				}
-			}
-		}
-	}
-	@media screen and (max-width: 600px){
-		input{
-			&[type="email"]{
-				padding-right: 90px;
-			}
-			&[type="submit"]{
-				width: 80px;
-				font-size: 16px;
-			}
-		}
-	}
 /* ======================================================================================= */

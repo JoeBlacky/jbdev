@@ -5,12 +5,14 @@
   }
   body{
     position: relative;
+    height: 100vh;
     min-width: $minWidth;
     text-align: center;
     text-transform: uppercase;
     color: #FFF;
     background: #171717;
     font-size: 0;
+    font-family: $primaryFont;
     &::before{
       content: '';
       width: 0;
@@ -18,30 +20,22 @@
       @extend %inline-block-middle;
     }
   }
-/* Headings ============================================================================== */
-  h2{
-    font: 50px/1.1 $primaryFont;
-  }
   h1{
     margin: 0 0 $mainIndent*.75;
-    white-space: nowrap;
-    font: 400 100px/1 $primaryFont;
-    color: $attentionColor;
+  }
+  b{
     overflow: hidden;
-    b{
-      max-width: 0;
-      overflow: hidden;
-      @extend %inline-block-middle;
-      + span{
-        font-size: 13px;
-      }
+    color: $attentionColor;
+    + span{
+      margin: 0;
+      font-size: 13px;
+      transform: rotate(-90deg);
     }
-    span{
-      margin: 0 -30px;
-      font-size: 15px;
-      color: #FFF;
-      @extend %inline-block-middle;
-    }
+  }
+  span{
+    display: block;
+    margin: 0 0 $mainIndent*.75;
+    font-size: 20px;
   }
   section{
     width: 100%;
@@ -49,33 +43,18 @@
     margin: 0 auto;
     padding: $mainIndent*2 $mainIndent/2;
   }
-/* Animations ============================================================================ */
-  .animate{
-    h1{
-        span{
-            + span{
-                font-size: 28px;
-                + b{
-                    @include animation($animationDuration type $animationDuration*4);
-                    + span{
-                        + b{
-                            @include animation($animationDuration type $animationDuration*7);
-                        }
-                    }
-                }
-            }
-        }
-    }
-    h2{
-      @include animation($animationDuration fallDawn);
-    }
-  }
 /* Helper Classes ======================================================================== */
-  .itm{
+  .itm{ // Inline block element
     @extend %inline-block-middle;
   }
-  .hdn{
-    @extend %hidden;
+  .hdn{ // Hidden element
+    // @extend %hidden;
+  }
+  .tlg{ // Text large
+    font: 50px/1.1 $primaryFont;
+  }
+  .telg{ // Text extra large
+    font: 700 100px/1 $primaryFont;
   }
 /* Messages ============================================================================== */
   .msg{
@@ -84,12 +63,12 @@
     border: 1px solid #FFF;
     text-transform: none;
     font-size: 14px;
+    transform: translate(0,-30px);
     @extend %hidden;
     @extend %transition-normal-speed;
-    @include translate(0,-10px);
     &.active{
+      transform: translate(0,0);
       @extend %visible;
-      @include translate(0,0);
     }
     &.success{
       border-color: $successColor;
@@ -99,76 +78,20 @@
     }
   }
 /* Media Queries ========================================================================= */
-    @media screen and (max-width: 800px){
-      h1{
-        font-size: 80px;
-          b{
-            margin: 0 (-$mainIndent/2);
-            + span{
-              font-size: 10px;
-            }
-          }
-        span{
-          margin: 0 -25px;
-          font-size: 12px;
-          + span{
-            font-size: 23px;
-          }
-        }
-      }
-      h2{
-        font-size: 40px;
+  @media screen and (max-width: 700px){
+    .tlg{
+      font-size: 24px;
+    }
+    .telg{
+      font-size: 50px;
+    }
+    span{
+      font-size: 16px;
+      &.itm{
+        display: block;
+        margin: $mainIndent/2 0;
+        transform: rotate(0);
       }
     }
-    @media screen and (min-width: 601px){
-      .animate{
-          h1{
-            span{
-              &:first-child{
-                @include animation(#{$animationDuration/2} getUp #{$animationDuration} 1 forwards,
-                  #{$animationDuration} rotateIn #{$animationDuration*1.5});
-            }
-            + span{
-              @include animation(#{$animationDuration/2} fallDawn #{$animationDuration*2.5} 1 forwards,
-                #{$animationDuration} rotateIn #{$animationDuration*3});
-              + b{
-                + span{
-                  @include animation(#{$animationDuration} scaleUp #{$animationDuration*5} 1 forwards,
-                    #{$animationDuration} rotateIn #{$animationDuration*6});
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-    @media screen and (max-width: 600px){
-      h1{
-        white-space: normal;
-        font-size: 54px;
-        b,
-        span{
-          display: block;
-          margin: 0 auto $mainIndent/2;
-        }
-        span{
-          font-size: 20px;
-          margin: 0 0 $mainIndent/2;
-          @include animation($animationDuration slideLeft $animationDuration);
-          + span{
-            @include animation($animationDuration slideRight $animationDuration*2);
-            + b{
-              + span{
-                font-size: 20px;
-                @include animation($animationDuration*2 scaleUp $animationDuration*5);
-              }
-            }
-          }
-        }
-      }
-      h2{
-        margin: 0 0 $mainIndent/2;
-        font-size: 30px;
-      }
-    }
+  }
 /* ======================================================================================= */

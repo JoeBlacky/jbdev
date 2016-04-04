@@ -4,10 +4,10 @@
 @import 'utils/variables';
 @import 'utils/mixins';
 @import 'utils/placeholders';
-@import 'utils/keyframes';
 @import 'utils/icons';
+@import 'utils/animations';
 
 @import 'layout/page';
 @import 'layout/forms';
 
-@import 'vendors/countdown';
+@import 'components/countdown';

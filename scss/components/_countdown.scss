@@ -1,0 +1,31 @@
+/* jQueryCountdown ======================================================================= */
+	$countdown: '.countdown';
+	$countBlockWidth: 70px;
+	$countBlockHeight: $countBlockWidth;
+	$countdownBlockBackground: url(../img/countdown.jpg) no-repeat center center / cover;
+/* Common ================================================================================ */
+	#{$countdown}{
+		font-size: 0;
+		.itm{
+			width: $countBlockWidth;
+			height: $countBlockHeight;
+			margin: $mainIndent ($minWidth - $countBlockWidth*4)/8;
+			background: $attentionColor $countdownBlockBackground;
+			text-align: center;
+			color: #252525;
+			font: 700 40px/#{$countBlockHeight} $primaryFont;
+		}
+	}
+/* Media Queries ========================================================================= */
+	@media screen and (max-width: 700px){
+		$countBlockWidth: 50px;
+		$countBlockHeight: $countBlockWidth;
+		#{$countdown}{
+			.itm{
+				width: $countBlockWidth;
+				height: $countBlockHeight;
+				font: 700 30px/#{$countBlockHeight} $primaryFont;
+			}
+		}
+	}
+/* ======================================================================================= */

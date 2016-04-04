@@ -1,0 +1,43 @@
+/* Animations ============================================================================ */
+.anim{
+  @extend %transition-slow-speed;
+  &.fade-in{
+    @extend %hidden;
+  }
+  &.sllide-up{
+    transform: translate(0,$mainIndent*2);
+  }
+  &.sllide-down{
+    transform: translate(0,(-$mainIndent*2));
+  }
+  &.sllide-left{
+    transform: translate($mainIndent*2,0);
+  }
+  &.sllide-right{
+    transform: translate((-$mainIndent*2),0);
+  }
+  &.get-wide{
+    max-width: 0;
+  }
+  $children: 10;
+    @for $i from 1 through $children {
+    &:nth-child(#{$i}) {
+      transition-delay: ($slow-speed * 1.5 * $i);
+    }
+  }
+}
+.animate{
+  .fade-in{
+    @extend %visible;
+  }
+  .sllide-up,
+  .sllide-down,
+  .sllide-left,
+  .sllide-right{
+    transform: translate(0,0);
+  }
+  .get-wide{
+    max-width: $minWidth;
+  }
+}
+/* ======================================================================================= */
