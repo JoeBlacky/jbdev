@@ -64,20 +64,20 @@
 			@extend %hidden;
 			@extend %transition-normal-speed;
 		}
-	}
-	label{
-		position: absolute;
-		height: $labelHeight;
-		width: $labelWidth;
-		left: 0;
-		top: 0;
-		font-size: 0;
-		color: transparent;
-		cursor: pointer;
-		background: #FFF;
-		&:before{
-			color: $attentionColor;
-			font: ($labelHeight/2)/#{$labelHeight} $iconsFont;
+		label{
+			position: absolute;
+			height: $labelHeight;
+			width: $labelWidth;
+			left: 0;
+			top: 0;
+			font-size: 0;
+			color: transparent;
+			cursor: pointer;
+			background: #FFF;
+			&:before{
+				color: $attentionColor;
+				font: ($labelHeight/2)/#{$labelHeight} $iconsFont;
+			}
 		}
 	}
 	#{$notHandheld}{
