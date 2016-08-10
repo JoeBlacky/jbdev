@@ -1,54 +1,8 @@
 var app = {
   init : function() {
     this.runAnimation();
-    this.countdown();
     this.form()
     this.analytics();
-  },
-  countdown : function() {
-
-    var launchDate = new Date(Date.parse('Apr 30 2016 00:00:00 GMT+0200'));
-    initializeClock('countdown', launchDate);
-
-    function getTimeRemaining(endtime) {
-      var t = Date.parse(endtime) - Date.parse(new Date());
-      var seconds = Math.floor((t / 1000) % 60);
-      var minutes = Math.floor((t / 1000 / 60) % 60);
-      var hours = Math.floor((t / (1000 * 60 * 60)) % 24);
-      var days = Math.floor(t / (1000 * 60 * 60 * 24));
-
-      return {
-        'total': t,
-        'days': days,
-        'hours': hours,
-        'minutes': minutes,
-        'seconds': seconds
-      };
-    }
-
-    function initializeClock(id, endtime) {
-      var clock = document.getElementById(id);
-      var daysBlock = clock.querySelector('.days');
-      var hoursBlock = clock.querySelector('.hours');
-      var minutesBlock = clock.querySelector('.minutes');
-      var secondsBlock = clock.querySelector('.seconds');
-      var timeinterval = setInterval(updateClock, 1000);
-
-      function updateClock() {
-        var t = getTimeRemaining(endtime);
-
-        daysBlock.innerHTML = ('0' + t.days).slice(-2);
-        hoursBlock.innerHTML = ('0' + t.hours).slice(-2);
-        minutesBlock.innerHTML = ('0' + t.minutes).slice(-2);
-        secondsBlock.innerHTML = ('0' + t.seconds).slice(-2);
-
-        if (t.total <= 0) {
-          clearInterval(timeinterval);
-        }
-      }
-
-      updateClock();
-    }
   },
   runAnimation : function() {
     document.body.className += 'animate';
